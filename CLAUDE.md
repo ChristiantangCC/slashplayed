@@ -31,13 +31,16 @@ the owner asks for it.
   `work/idevice/macos/`).
 - `apps/client/`: the device app. `launcher.m` (the `slashplayed` executable: picks the game, retires what it can't load, and loads
   `Library/spgames/wow-<flavor>`, the game's unchanged slice, with spguest),
-  `spjit.m` (its side of the JIT helper), `sppair.m` (the headset's pairing; its screen is `sppairscreen.swift`), `spvpn.m` (the
+  `spjit.m` (its side of the JIT helper, and `sp_relaunch`, the way back to the start screen when a game quits), `sppair.m` (the headset's pairing; its screen is `sppairscreen.swift`), `spvpn.m` (the
   wait for LocalDevVPN; its screen is `spvpnscreen.swift`), `spstyle.swift` (the launcher's look, shared by every
   SwiftUI screen: one game button, `GameButtonStyle`), `splogin.m` (the Battle.net sign-in: the keychain and `login.txt`; its screen is `spsignin.swift`),
   `spstart.m` (the start screen, every launch that doesn't name a game: the wait for a tap, `SP_START_TEXT_SIZE`, Goodmountain's
   registration, `sp_face`; its screen is `spstartscreen.swift`; its logo is the icon's own vectors, `splogo.h`, and its face
   Goodmountain, never committed: `scripts/fetch-font.sh`), `spsettings.swift` (the start screen's Settings sheet: the sign-in's forget,
-  each game's build and where it came from (`spsource-<flavor>`), Open in Files, and Reset Game Settings, Acknowledgements, and the `SP_START_DRILL` states), `sppatch.m` (the check for a newer build; its screen is `sppatchscreen.swift`; it fetches the new client with
+  each game's build and where it came from (`spsource-<flavor>`), Open in Files, and Reset Game Settings, Acknowledgements, and the `SP_START_DRILL` states), `spaddons.m` (each
+  game's addons: the catalog, `paulstraw/slashplayed-addons`, GitHub links, a zip reader over zlib, and the record of what it
+  installed, `Library/spaddons-<flavor>.json`; Foundation only, tested in the companion's `AddonsTests`; its Settings pages are
+  `spaddonsscreen.swift`), `sppatch.m` (the check for a newer build; its screen is `sppatchscreen.swift`; it fetches the new client with
   `spcdn.m`, the port of `BlizzardCDN.swift`, and checks its imports with `spbind.m`; both Foundation only,
   tested in the companion's tests; an Update or an install puts that slice in place, signing nothing), `spapple.m` (the
   Apple token: the one file that holds it, and the app's renewed profiles from Apple through `spapple/`, a Rust
